@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Application - University Loans Application System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <header class="bg-primary text-white p-4">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1>University Loans Application System</h1>
+        <div>
+          <a href="dashboard.html" class="btn btn-outline-light me-2">Dashboard</a>
+          <button class="btn btn-light" id="logoutBtn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Loan Application</h2>
+            
+            <div class="alert alert-info">
+              <h5>Interest-Free Student Loan</h5>
+              <p class="mb-0">Our loans are 100% interest-free. You'll only repay the exact amount you borrow, with no additional interest charges. Repayment schedules are tailored to your income after graduation.</p>
+            </div>
+            
+            <form id="loanApplicationForm">
+              <input type="hidden" id="userId" name="userId">
+              
+              <div class="mb-3">
+                <label for="organization" class="form-label">University/Institution Name</label>
+                <input type="text" class="form-control" id="organization" name="organization" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="course" class="form-label">Course/Program Name</label>
+                <input type="text" class="form-control" id="course" name="course" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="amount" class="form-label">Loan Amount (£)</label>
+                <input type="number" class="form-control" id="amount" name="amount" required min="100">
+                <div class="form-text">Enter the amount you need for your education expenses.</div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="purpose" class="form-label">Purpose of Loan</label>
+                <select class="form-select" id="purpose" name="purpose" required>
+                  <option value="">Select Purpose</option>
+                  <option value="Tuition">Tuition Fees</option>
+                  <option value="Accommodation">Accommodation</option>
+                  <option value="Books">Books and Materials</option>
+                  <option value="Living">Living Expenses</option>
+                  <option value="Other">Other (Please specify)</option>
+                </select>
+              </div>
+              
+              <div class="mb-3" id="otherPurposeField" style="display: none;">
+                <label for="otherPurpose" class="form-label">Please Specify</label>
+                <input type="text" class="form-control" id="otherPurpose" name="otherPurpose">
+              </div>
+              
+              <div class="mb-3">
+                <label for="studyDuration" class="form-label">Duration of Study (Years)</label>
+                <input type="number" class="form-control" id="studyDuration" name="studyDuration" required min="1" max="10">
+              </div>
+              
+              <div class="alert alert-warning">
+                <p class="mb-0">
+                  <strong>Note:</strong> You will need to provide financial information and verify your identity before your loan application can be processed. After submitting this form, you will be directed to the financial information page.
+                </p>
+              </div>
+              
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Submit Loan Application</button>
+                <a href="dashboard.html" class="btn btn-outline-secondary">Cancel</a>
+              </div>
+  </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-light p-4 mt-5">
+    <div class="container text-center">
+      <p>&copy; 2025 University Loans Application System</p>
+      <div>
+        <a href="#" class="text-decoration-none me-3">Privacy Policy</a>
+        <a href="#" class="text-decoration-none me-3">Terms of Service</a>
+        <a href="#" class="text-decoration-none">Contact Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="createLoanApplication.js"></script>
+</body>
+</html>
+

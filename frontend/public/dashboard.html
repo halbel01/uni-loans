@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - University Loans Application System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <!-- Animation library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    .dashboard-header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      border-radius: 0 0 20px 20px;
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 25px rgba(136, 66, 213, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dashboard-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      transform: rotate(30deg);
+    }
+    
+    .dashboard-header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 2.2rem;
+      letter-spacing: -0.03em;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dashboard-welcome {
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    
+    .dashboard-stats {
+      background: white;
+      border-radius: 16px;
+      padding: 1.8rem;
+      height: 100%;
+      box-shadow: 0 10px 20px rgba(136, 66, 213, 0.08);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .dashboard-stats::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(136, 66, 213, 0.05) 100%);
+      z-index: -1;
+    }
+    
+    .dashboard-stats:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(136, 66, 213, 0.15);
+    }
+    
+    .stats-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      color: var(--primary-color);
+      background: rgba(136, 66, 213, 0.1);
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .dashboard-stats:hover .stats-icon {
+      background: var(--primary-color);
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .stats-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .stats-label {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--secondary-color);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+    
+    .action-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(136, 66, 213, 0.08);
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .action-card .card-body {
+      padding: 1.8rem;
+    }
+    
+    .action-card h3 {
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: var(--primary-color);
+    }
+    
+    .action-button {
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      text-align: left;
+      border: none;
+    }
+    
+    .action-button i {
+      font-size: 1.25rem;
+      margin-right: 0.8rem;
+      transition: all 0.3s ease;
+    }
+    
+    .action-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(136, 66, 213, 0.15);
+    }
+    
+    .action-button:hover i {
+      transform: scale(1.2);
+    }
+    
+    .action-button::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: -100%;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+      transition: all 0.8s ease;
+    }
+    
+    .action-button:hover::after {
+      left: 100%;
+    }
+    
+    .action-button.primary {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .action-button.success {
+      background: var(--success-color);
+      color: white;
+    }
+    
+    .action-button.info {
+      background: var(--info-color);
+      color: white;
+    }
+    
+    .action-button.secondary {
+      background: var(--secondary-color);
+      color: white;
+    }
+    
+    .sidebar-wrapper {
+      position: relative;
+    }
+    
+    .sidebar {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem 1rem;
+      margin-top: 1rem;
+      position: sticky;
+      top: 2rem;
+      box-shadow: 0 10px 30px rgba(136, 66, 213, 0.1);
+    }
+    
+    .sidebar .nav-link {
+      margin: 0.4rem 0;
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .sidebar .nav-link i {
+      margin-right: 0.8rem;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .sidebar .nav-link:hover {
+      background: rgba(136, 66, 213, 0.08);
+      color: var(--primary-color);
+      transform: translateX(5px);
+    }
+    
+    .sidebar .nav-link.active {
+      background: var(--primary-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(136, 66, 213, 0.25);
+    }
+    
+    .sidebar .nav-link.active i {
+      transform: scale(1.2);
+    }
+    
+    .content-section {
+      padding: 2rem 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    
+    .content-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .section-title::before {
+      content: '';
+      width: 40px;
+      height: 3px;
+      background: var(--primary-color);
+      margin-right: 1rem;
+      border-radius: 3px;
+    }
+    
+    .section-title h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin: 0;
+      color: var(--dark-color);
+    }
+    
+    .data-table {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .data-table .table {
+      margin-bottom: 0;
+    }
+    
+    .data-table thead th {
+      background: rgba(136, 66, 213, 0.05);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      padding: 1rem;
+      border-bottom: none;
+    }
+    
+    .data-table tbody td {
+      padding: 1rem;
+      vertical-align: middle;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .data-table tbody tr:hover {
+      background-color: rgba(136, 66, 213, 0.02);
+    }
+    
+    .badge {
+      padding: 0.5rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 6px;
+    }
+    
+    .empty-state {
+      padding: 3rem;
+      text-align: center;
+    }
+    
+    .empty-icon {
+      font-size: 3rem;
+      color: rgba(136, 66, 213, 0.3);
+      margin-bottom: 1.5rem;
+    }
+    
+    .empty-message {
+      font-size: 1.1rem;
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer {
+      background-color: white;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Animation classes */
+    .fade-up {
+      animation: fadeInUp;
+      animation-duration: 0.8s;
+    }
+    
+    .fade-in {
+      animation: fadeIn;
+      animation-duration: 1s;
+    }
+    
+    .bounce-in {
+      animation: bounceIn;
+      animation-duration: 0.8s;
+    }
+    
+    .pulse {
+      animation: pulse;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+  </style>
+</head>
+<body>
+  <header class="dashboard-header text-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h1 class="animate__animated animate__fadeInLeft">University Loans</h1>
+          <p class="dashboard-welcome animate__animated animate__fadeInLeft animate__delay-1s">Your education financing solution</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <div class="d-flex justify-content-md-end align-items-center">
+            <div class="d-flex align-items-center me-4 animate__animated animate__fadeIn animate__delay-1s">
+              <i class="bi bi-person-circle me-2" style="font-size: 1.5rem;"></i>
+              <span id="welcomeMessage" class="dashboard-welcome">Welcome, User</span>
+            </div>
+            <button class="btn btn-light px-3 py-2 animate__animated animate__fadeIn animate__delay-1s" id="logoutBtn">
+              <i class="bi bi-box-arrow-right me-2"></i>Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row g-4">
+      <!-- Sidebar -->
+      <div class="col-lg-3 col-xl-2 sidebar-wrapper d-none d-lg-block">
+        <nav id="sidebar" class="sidebar animate__animated animate__fadeInLeft">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#overviewSection">
+                <i class="bi bi-house-door"></i>
+                Overview
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#applicationSection">
+                <i class="bi bi-file-earmark-text"></i>
+                Loan Applications
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#financialSection">
+                <i class="bi bi-cash-coin"></i>
+                Financial Information
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#repaymentSection">
+                <i class="bi bi-arrow-repeat"></i>
+                Repayments
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#documentsSection">
+                <i class="bi bi-file-earmark"></i>
+                Documents
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div class="col-12 d-lg-none mb-4">
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="btn-group w-100">
+              <button class="btn btn-outline-primary active py-2" data-section="overviewSection">
+                <i class="bi bi-house-door d-block mb-1" style="font-size: 1.2rem;"></i>
+                <span class="small">Overview</span>
+              </button>
+              <button class="btn btn-outline-primary py-2" data-section="applicationSection">
+                <i class="bi bi-file-earmark-text d-block mb-1" style="font-size: 1.2rem;"></i>
+                <span class="small">Applications</span>
+              </button>
+              <button class="btn btn-outline-primary py-2" data-section="financialSection">
+                <i class="bi bi-cash-coin d-block mb-1" style="font-size: 1.2rem;"></i>
+                <span class="small">Financial</span>
+              </button>
+              <button class="btn btn-outline-primary py-2" data-section="repaymentSection">
+                <i class="bi bi-arrow-repeat d-block mb-1" style="font-size: 1.2rem;"></i>
+                <span class="small">Repayments</span>
+              </button>
+              <button class="btn btn-outline-primary py-2" data-section="documentsSection">
+                <i class="bi bi-file-earmark d-block mb-1" style="font-size: 1.2rem;"></i>
+                <span class="small">Documents</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <main class="col-lg-9 col-xl-10">
+        <!-- Overview Section -->
+        <section id="overviewSection" class="content-section visible fade-in">
+          <div class="section-title">
+            <h2>Dashboard Overview</h2>
+          </div>
+          
+          <div class="row g-4 mb-4">
+            <div class="col-md-4 fade-up" style="animation-delay: 0.1s">
+              <div class="dashboard-stats">
+                <div class="stats-icon bounce-in">
+                  <i class="bi bi-file-earmark-text"></i>
+                </div>
+                <div class="stats-value" id="applicationCount">0</div>
+                <p class="stats-label">Applications</p>
+              </div>
+            </div>
+            <div class="col-md-4 fade-up" style="animation-delay: 0.2s">
+              <div class="dashboard-stats">
+                <div class="stats-icon bounce-in">
+                  <i class="bi bi-currency-pound"></i>
+                </div>
+                <div class="stats-value" id="totalBorrowed">£0</div>
+                <p class="stats-label">Total Borrowed</p>
+              </div>
+            </div>
+            <div class="col-md-4 fade-up" style="animation-delay: 0.3s">
+              <div class="dashboard-stats">
+                <div class="stats-icon bounce-in">
+                  <i class="bi bi-wallet2"></i>
+                </div>
+                <div class="stats-value" id="remainingBalance">£0</div>
+                <p class="stats-label">Remaining Balance</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 fade-up" style="animation-delay: 0.4s">
+              <div class="action-card card">
+                <div class="card-body">
+                  <h3>Quick Actions</h3>
+                  <div class="row">
+                    <div class="col-md-6 col-lg-3 mb-3">
+                      <a href="loan-application.html" class="action-button primary">
+                        <i class="bi bi-plus-circle"></i>
+                        Apply for a Loan
+                      </a>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                      <a href="financial-data.html" class="action-button success">
+                        <i class="bi bi-cash-coin"></i>
+                        Update Financial Info
+                      </a>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                      <a href="upload-documents.html" class="action-button info">
+                        <i class="bi bi-file-earmark-arrow-up"></i>
+                        Upload Documents
+                      </a>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                      <a href="loan-status.html" class="action-button secondary">
+                        <i class="bi bi-eye"></i>
+                        View Loan Status
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Loan Applications Section -->
+        <section id="applicationSection" class="content-section">
+          <div class="section-title">
+            <h2>Your Loan Applications</h2>
+          </div>
+          
+          <div class="card action-card fade-up">
+            <div class="card-body">
+              <div class="data-table">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Application ID</th>
+                      <th>Institution</th>
+                      <th>Course</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Submitted Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="applicationsTableBody">
+                    <!-- Application data will be populated here -->
+                    <tr>
+                      <td colspan="7" class="empty-state">
+                        <div class="empty-icon">
+                          <i class="bi bi-file-earmark-x"></i>
+                        </div>
+                        <div class="empty-message">No applications found</div>
+                        <a href="loan-application.html" class="btn btn-primary">
+                          <i class="bi bi-plus-circle me-2"></i>Apply for a loan
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Financial Information Section -->
+        <section id="financialSection" class="content-section">
+          <div class="section-title">
+            <h2>Financial Information</h2>
+          </div>
+          
+          <div class="card action-card fade-up">
+            <div class="card-body">
+              <div id="financialDataContainer" class="p-2">
+                <div class="empty-state">
+                  <div class="empty-icon">
+                    <i class="bi bi-cash"></i>
+                  </div>
+                  <div class="empty-message">No financial information found</div>
+                  <a href="financial-data.html" class="btn btn-primary">
+                    <i class="bi bi-pencil me-2"></i>Submit your financial information
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Repayments Section -->
+        <section id="repaymentSection" class="content-section">
+          <div class="section-title">
+            <h2>Loan Repayments</h2>
+          </div>
+          
+          <div class="card action-card fade-up">
+            <div class="card-body">
+              <div id="repaymentsContainer" class="p-2">
+                <div class="empty-state">
+                  <div class="empty-icon">
+                    <i class="bi bi-arrow-repeat"></i>
+                  </div>
+                  <div class="empty-message">No repayments found</div>
+                  <p class="text-muted">You will see your repayment schedule here once your loan is approved.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Documents Section -->
+        <section id="documentsSection" class="content-section">
+          <div class="section-title">
+            <h2>Uploaded Documents</h2>
+          </div>
+          
+          <div class="card action-card fade-up">
+            <div class="card-body">
+              <div id="documentsContainer" class="p-2">
+                <div class="empty-state">
+                  <div class="empty-icon">
+                    <i class="bi bi-file-earmark"></i>
+                  </div>
+                  <div class="empty-message">No documents found</div>
+                  <a href="upload-documents.html" class="btn btn-primary">
+                    <i class="bi bi-file-earmark-arrow-up me-2"></i>Upload identification and financial documents
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h4 class="text-primary mb-3">University Loans Application System</h4>
+          <p class="text-muted">Interest-free student loans for higher education</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <div class="d-flex flex-column flex-md-row justify-content-md-end gap-2 gap-md-4">
+            <a href="#" class="text-decoration-none text-secondary">Privacy Policy</a>
+            <a href="#" class="text-decoration-none text-secondary">Terms of Service</a>
+            <a href="#" class="text-decoration-none text-secondary">Contact Support</a>
+          </div>
+          <p class="mt-3 text-muted">&copy; 2025 University Loans Application System</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="dashboardScript.js"></script>
+  <script>
+    // Enhanced UI interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      // Show sections on navigation
+      function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.content-section').forEach(section => {
+          section.classList.remove('visible');
+        });
+        
+        // Show the selected section
+        const selectedSection = document.getElementById(sectionId);
+        setTimeout(() => {
+          selectedSection.classList.add('visible');
+        }, 50);
+        
+        // Update sidebar active state
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+          }
+        });
+        
+        // Update mobile navigation active state
+        document.querySelectorAll('.btn-group .btn').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-section') === sectionId) {
+            btn.classList.add('active');
+          }
+        });
+      }
+      
+      // Desktop navigation
+      document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const sectionId = this.getAttribute('href').substring(1);
+          showSection(sectionId);
+        });
+      });
+      
+      // Mobile navigation
+      document.querySelectorAll('.btn-group .btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const sectionId = this.getAttribute('data-section');
+          showSection(sectionId);
+        });
+      });
+      
+      // Initialize animations for visible elements
+      const animateElementsOnScroll = function() {
+        document.querySelectorAll('.fade-up, .fade-in, .bounce-in').forEach(element => {
+          if (isElementInViewport(element) && !element.classList.contains('animated')) {
+            element.classList.add('animate__animated');
+            if (element.classList.contains('fade-up')) {
+              element.classList.add('animate__fadeInUp');
+            } else if (element.classList.contains('fade-in')) {
+              element.classList.add('animate__fadeIn');
+            } else if (element.classList.contains('bounce-in')) {
+              element.classList.add('animate__bounceIn');
+            }
+            element.classList.add('animated');
+          }
+        });
+      };
+      
+      function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.bottom >= 0
+        );
+      }
+      
+      // Initial call and event binding
+      animateElementsOnScroll();
+      window.addEventListener('scroll', animateElementsOnScroll);
+      
+      // Enhance empty states when data loads
+      const originalFetchApplications = window.fetchApplications;
+      if (originalFetchApplications) {
+        window.fetchApplications = async function() {
+          await originalFetchApplications();
+          
+          // Enhance table rows with animation
+          document.querySelectorAll('#applicationsTableBody tr').forEach((row, index) => {
+            row.classList.add('animate__animated', 'animate__fadeInUp');
+            row.style.animationDelay = `${0.1 * index}s`;
+          });
+        };
+      }
+      
+      const originalFetchFinancialData = window.fetchFinancialData;
+      if (originalFetchFinancialData) {
+        window.fetchFinancialData = async function() {
+          await originalFetchFinancialData();
+          
+          // Add animation to financial data
+          const container = document.getElementById('financialDataContainer');
+          if (container && !container.querySelector('.empty-state')) {
+            container.classList.add('animate__animated', 'animate__fadeIn');
+          }
+        };
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Documents - University Loans Application System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <header class="bg-primary text-white p-4">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1>University Loans Application System</h1>
+        <div>
+          <button class="btn btn-outline-light" id="backBtn">Back to Dashboard</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title mb-4">Document Verification</h2>
+            <p class="mb-4">Review uploaded documents for the selected application</p>
+            
+            <div class="mb-4">
+              <h3>Application Details</h3>
+              <hr>
+              <div class="row">
+                <div class="col-md-6">
+                  <p><strong>Applicant:</strong> <span id="applicantName">-</span></p>
+                  <p><strong>Email:</strong> <span id="applicantEmail">-</span></p>
+                  <p><strong>Phone:</strong> <span id="applicantPhone">-</span></p>
+                </div>
+                <div class="col-md-6">
+                  <p><strong>Institution:</strong> <span id="institution">-</span></p>
+                  <p><strong>Course:</strong> <span id="course">-</span></p>
+                  <p><strong>Loan Amount:</strong> <span id="loanAmount">-</span></p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <h3>Financial Information</h3>
+              <hr>
+              <div class="row">
+                <div class="col-md-6">
+                  <p><strong>Annual Income:</strong> <span id="annualIncome">-</span></p>
+                  <p><strong>Family Income:</strong> <span id="familyIncome">-</span></p>
+                </div>
+                <div class="col-md-6">
+                  <p><strong>Outstanding Debts:</strong> <span id="outstandingDebts">-</span></p>
+                  <p><strong>Assets:</strong> <span id="assets">-</span></p>
+                </div>
+              </div>
+              <p><strong>Additional Notes:</strong> <span id="additionalNotes">-</span></p>
+            </div>
+            
+            <div class="mb-4">
+              <h3>Uploaded Documents</h3>
+              <hr>
+              <div class="row" id="documentsContainer">
+                <!-- Documents will be listed here -->
+                <p class="text-center" id="noDocumentsMsg">No documents have been uploaded</p>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <h3>Verification Decision</h3>
+              <hr>
+              <form id="verificationForm">
+                <input type="hidden" id="loanId" name="loanId">
+                
+                <div class="mb-3">
+                  <label for="verificationStatus" class="form-label">Document Verification Status</label>
+                  <select class="form-select" id="verificationStatus" name="verificationStatus" required>
+                    <option value="">Select Status</option>
+                    <option value="verified">Verified - Documents Accepted</option>
+                    <option value="rejected">Rejected - Documents Insufficient</option>
+                    <option value="moreInfo">Request More Information</option>
+                  </select>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="verificationNotes" class="form-label">Notes</label>
+                  <textarea class="form-control" id="verificationNotes" name="verificationNotes" rows="3" placeholder="Provide details about your verification decision"></textarea>
+                </div>
+                
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary">Submit Verification</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Document Preview Modal -->
+  <div class="modal fade" id="documentModal" tabindex="-1" aria-labelledby="documentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="documentModalLabel">Document Preview</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center" id="documentPreview">
+          <!-- Document preview will be shown here -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="#" class="btn btn-primary" id="downloadDoc" target="_blank">Download</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-light p-4 mt-5">
+    <div class="container text-center">
+      <p>&copy; 2025 University Loans Application System</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="verifyDocumentsScript.js"></script>
+</body>
+</html> 
